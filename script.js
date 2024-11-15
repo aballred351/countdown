@@ -63,7 +63,7 @@ function getWeekdayCount(startDate, targetDate, includeFinalDay = true) {
 function getTimeRemaining(targetDate) {
     const now = new Date();
     const target = new Date(targetDate);
-    target.setHours(14, 20, 0, 0); // Set to 3:20 PM
+    target.setHours(14, 50, 0, 0); // Set to 3:20 PM
     
     const total = target - now;
     const seconds = Math.floor((total / 1000) % 60);
