@@ -144,7 +144,7 @@ function updateCountdowns() {
     const realTimeTarget1 = new Date(2024, 10, 26); // Nov 26
     const realTimeTarget2 = new Date(2024, 11, 20); // Dec 20
     const realTimeTarget3 = new Date(2025, 2, 14);  // Mar 14
-    const realTimeTarget4 = new Date(2025, 5, 3);   // Jun 3
+    const realTimeTarget4 = new Date(2025, 5, 6);   // Jun 6
     
     updateRealTimeCountdown('realtime1', realTimeTarget1);
     updateRealTimeCountdown('realtime2', realTimeTarget2);
