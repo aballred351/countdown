@@ -102,7 +102,7 @@ function updateCountdowns() {
     const targetDate1 = new Date(2024, 10, 26, 6, 0, 0, 0); // November 26, 2024 at 6:00 AM
     const targetDate2 = new Date(2024, 11, 20, 6, 0, 0, 0); // December 20, 2024 at 6:00 AM
     const targetDate3 = new Date(2025, 2, 14, 6, 0, 0, 0);  // March 14, 2025 at 6:00 AM
-    const targetDate4 = new Date(2025, 5, 6, 6, 0, 0, 0);   // June 3, 2025 at 6:00 AM
+    const targetDate4 = new Date(2025, 5, 5, 6, 0, 0, 0);   // June 5, 2025 at 6:00 AM
 
     // Handle November 26th countdown
     if (now >= targetDate1) {
@@ -144,7 +144,7 @@ function updateCountdowns() {
     const realTimeTarget1 = new Date(2024, 10, 26); // Nov 26
     const realTimeTarget2 = new Date(2024, 11, 20); // Dec 20
     const realTimeTarget3 = new Date(2025, 2, 14);  // Mar 14
-    const realTimeTarget4 = new Date(2025, 5, 6);   // Jun 6
+    const realTimeTarget4 = new Date(2025, 5, 5);   // Jun 5
     
     updateRealTimeCountdown('realtime1', realTimeTarget1);
     updateRealTimeCountdown('realtime2', realTimeTarget2);
