@@ -98,59 +98,43 @@ function updateRealTimeCountdown(elementId, targetDate) {
 
 function updateCountdowns() {
     const now = new Date();
+
+    const checkTodayIsSchoolDay = () => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const dayOfWeek = today.getDay();
+        return dayOfWeek >= 1 && dayOfWeek <= 5 && !isExcludedDate(today);
+    };
+
+    const adjustCount = (weekdayCount) => {
+        const isTodaySchoolDay = checkTodayIsSchoolDay();
+        return (now.getHours() >= 6 && isTodaySchoolDay) ? weekdayCount - 1 : weekdayCount;
+    };
+
     // Set target dates
-    const targetDate1 = new Date(2024, 10, 26, 6, 0, 0, 0); // November 26, 2024 at 6:00 AM
-    const targetDate2 = new Date(2024, 11, 20, 6, 0, 0, 0); // December 20, 2024 at 6:00 AM
-    const targetDate3 = new Date(2025, 2, 14, 6, 0, 0, 0);  // March 14, 2025 at 6:00 AM
-    const targetDate4 = new Date(2025, 5, 5, 6, 0, 0, 0);   // June 5, 2025 at 6:00 AM
+    const targetDates = [
+        { target: new Date(2024, 10, 26, 6, 0, 0, 0), countdownId: 'countdown1', realtimeId: 'realtime1' },
+        { target: new Date(2024, 11, 20, 6, 0, 0, 0), countdownId: 'countdown2', realtimeId: 'realtime2' },
+        { target: new Date(2025, 2, 14, 6, 0, 0, 0), countdownId: 'countdown3', realtimeId: 'realtime3' },
+        { target: new Date(2025, 5, 5, 6, 0, 0, 0), countdownId: 'countdown4', realtimeId: 'realtime4' }
+    ];
 
-    // Handle November 26th countdown
-    if (now >= targetDate1) {
-        document.getElementById('countdown1').textContent = "0 school days";
-    } else {
-        const weekdayCount1 = getWeekdayCount(now, targetDate1);
-        const adjustedCount1 = now.getHours() >= 6 ? weekdayCount1 - 1 : weekdayCount1;
-        document.getElementById('countdown1').textContent = `${adjustedCount1} school day${adjustedCount1 === 1 ? '' : 's'}`;
-    }
-    
-    // Handle December 20th countdown
-    if (now >= targetDate2) {
-        document.getElementById('countdown2').textContent = "0 school days";
-    } else {
-        const weekdayCount2 = getWeekdayCount(now, targetDate2);
-        const adjustedCount2 = now.getHours() >= 6 ? weekdayCount2 - 1 : weekdayCount2;
-        document.getElementById('countdown2').textContent = `${adjustedCount2} school day${adjustedCount2 === 1 ? '' : 's'}`;
-    }
+    targetDates.forEach(({ target, countdownId, realtimeId }, index) => {
+        if (now >= target) {
+            document.getElementById(countdownId).textContent = "0 school days";
+        } else {
+            const weekdayCount = getWeekdayCount(now, target, true);
+            const adjustedCount = adjustCount(weekdayCount);
+            document.getElementById(countdownId).textContent = `${adjustedCount} school day${adjustedCount === 1 ? '' : 's'}`;
+        }
 
-    // Handle Spring Break countdown
-    if (now >= targetDate3) {
-        document.getElementById('countdown3').textContent = "0 school days";
-    } else {
-        const weekdayCount3 = getWeekdayCount(now, targetDate3, true);
-        const adjustedCount3 = now.getHours() >= 6 ? weekdayCount3 - 1 : weekdayCount3;
-        document.getElementById('countdown3').textContent = `${adjustedCount3} school day${adjustedCount3 === 1 ? '' : 's'}`;
-    }
-
-    // Handle End of School countdown
-    if (now >= targetDate4) {
-        document.getElementById('countdown4').textContent = "0 school days";
-    } else {
-        const weekdayCount4 = getWeekdayCount(now, targetDate4, true);
-        const adjustedCount4 = now.getHours() >= 6 ? weekdayCount4 - 1 : weekdayCount4;
-        document.getElementById('countdown4').textContent = `${adjustedCount4} school day${adjustedCount4 === 1 ? '' : 's'}`;
-    }
-
-    // Update real-time countdowns
-    const realTimeTarget1 = new Date(2024, 10, 26); // Nov 26
-    const realTimeTarget2 = new Date(2024, 11, 20); // Dec 20
-    const realTimeTarget3 = new Date(2025, 2, 14);  // Mar 14
-    const realTimeTarget4 = new Date(2025, 5, 5);   // Jun 5
-    
-    updateRealTimeCountdown('realtime1', realTimeTarget1);
-    updateRealTimeCountdown('realtime2', realTimeTarget2);
-    updateRealTimeCountdown('realtime3', realTimeTarget3);
-    updateRealTimeCountdown('realtime4', realTimeTarget4);
+        // Update real-time countdown to 2:50 PM on target date
+        const realTimeTarget = new Date(target);
+        realTimeTarget.setHours(14, 50, 0, 0);
+        updateRealTimeCountdown(realtimeId, realTimeTarget);
+    });
 }
+
 
 function scheduleNextUpdate() {
     const now = new Date();
