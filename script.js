@@ -1,42 +1,62 @@
+// 2025-26 School Year Countdown (Cedar Rapids CSD - Middle School hrs end 2:50 PM)
 function isExcludedDate(date) {
     // Convert date to YYYY-MM-DD format for easy comparison
     const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-    
-    // List of excluded dates (holidays, breaks, etc.) in YYYY-MM-DD format
+
+    // List of excluded dates (no school for students) in YYYY-MM-DD format
+    // From district calendar legend: Staff Learning, Teacher Directed, Teacher Comp Day,
+    // Breaks, and District Holidays.
     const excludedDates = [
-        // Thanksgiving break
-        '2024-11-27', '2024-11-28', '2024-11-29',
-        
-        // Winter break
-        '2024-12-23', '2024-12-24', '2024-12-25', '2024-12-26', '2024-12-27', '2024-12-30', '2024-12-31',
-        '2025-01-01', '2025-01-02', '2025-01-03',
-        
-        // Individual excluded dates before Spring Break
-        '2025-01-17', // January 17
-        '2025-01-20', // January 20
-        '2025-02-10', // February 10
-        '2025-02-28', // February 28
-        
-        // Spring Break week
-        '2025-03-17', '2025-03-18', '2025-03-19', '2025-03-20', '2025-03-21',
-        
-        // Individual excluded dates after Spring Break
-        '2025-03-31', // March 31
-        '2025-04-18', // April 18
-        '2025-04-21', // April 21
-        '2025-05-02', // May 2
-        '2025-05-12', // May 12
-        '2025-05-26'  // May 26
+        // SEPTEMBER 2025
+        '2025-09-01', // Labor Day (Holiday)
+        '2025-09-22', // Staff Professional Learning
+
+        // OCTOBER 2025
+        '2025-10-16', // Teacher Comp Day
+        '2025-10-17', // Staff Professional Learning
+        '2025-10-27', // Teacher Directed
+
+        // NOVEMBER 2025
+        '2025-11-17', // Staff Professional Learning
+        '2025-11-26', '2025-11-27', '2025-11-28', // Thanksgiving Break (Wed–Fri)
+
+        // DECEMBER 2025 - WINTER BREAK
+        '2025-12-22', '2025-12-23', '2025-12-24', '2025-12-25', '2025-12-26',
+        '2025-12-29', '2025-12-30', '2025-12-31',
+
+        // JANUARY 2026
+        '2026-01-01', // New Year’s Day (Holiday)
+        '2026-01-16', // Staff Professional Learning
+        '2026-01-19', // MLK Jr. Day (Holiday)
+
+        // FEBRUARY 2026
+        '2026-02-13', // Staff Professional Learning
+        '2026-02-16', // Presidents’ Day (Holiday)
+        '2026-02-23', // Teacher Directed
+
+        // MARCH 2026
+        '2026-03-13', // Staff Professional Learning
+        // Spring Break
+        '2026-03-23', '2026-03-24', '2026-03-25', '2026-03-26', '2026-03-27',
+        '2026-03-30', // Teacher Directed (after break)
+
+        // APRIL 2026
+        '2026-04-17', // Staff Professional Learning
+
+        // MAY 2026
+        '2026-05-01', // No school day
+        '2026-05-11', // Teacher Comp Day
+        '2026-05-25'  // Memorial Day (Holiday)
     ];
-    
+
     return excludedDates.includes(dateString);
 }
 
 function getWeekdayCount(startDate, targetDate, includeFinalDay = true) {
     let count = 0;
     let currentDate = new Date(startDate);
-    
-    // Start counting from today if before 6 AM, or start counting from today regardless of time
+
+    // Normalize to midnight
     currentDate.setHours(0, 0, 0, 0);
 
     const endDate = new Date(targetDate);
@@ -56,34 +76,28 @@ function getWeekdayCount(startDate, targetDate, includeFinalDay = true) {
         }
         currentDate.setDate(currentDate.getDate() + 1);
     }
-    
+
     return count;
 }
 
 function getTimeRemaining(targetDate) {
     const now = new Date();
     const target = new Date(targetDate);
-    target.setHours(14, 50, 0, 0); // Set to 3:20 PM
-    
+    target.setHours(14, 50, 0, 0); // Middle school dismissal 2:50 PM
+
     const total = target - now;
     const seconds = Math.floor((total / 1000) % 60);
     const minutes = Math.floor((total / 1000 / 60) % 60);
     const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
     const days = Math.floor(total / (1000 * 60 * 60 * 24));
-    
-    return {
-        total,
-        days,
-        hours,
-        minutes,
-        seconds
-    };
+
+    return { total, days, hours, minutes, seconds };
 }
 
 function updateRealTimeCountdown(elementId, targetDate) {
     const time = getTimeRemaining(targetDate);
     const element = document.getElementById(elementId);
-    
+
     if (time.total <= 0) {
         element.innerHTML = "Break has started!";
     } else {
@@ -111,15 +125,19 @@ function updateCountdowns() {
         return (now.getHours() >= 6 && isTodaySchoolDay) ? weekdayCount - 1 : weekdayCount;
     };
 
-    // Set target dates
+    // Target dates to count down to (6:00 AM anchors; real-time shows 2:50 PM same day)
     const targetDates = [
-        { target: new Date(2024, 10, 26, 6, 0, 0, 0), countdownId: 'countdown1', realtimeId: 'realtime1' },
-        { target: new Date(2024, 11, 20, 6, 0, 0, 0), countdownId: 'countdown2', realtimeId: 'realtime2' },
-        { target: new Date(2025, 2, 14, 6, 0, 0, 0), countdownId: 'countdown3', realtimeId: 'realtime3' },
-        { target: new Date(2025, 5, 5, 6, 0, 0, 0), countdownId: 'countdown4', realtimeId: 'realtime4' }
+        // Thanksgiving Break start (Wed)
+        { target: new Date(2025, 10, 26, 6, 0, 0, 0), countdownId: 'countdown1', realtimeId: 'realtime1' },
+        // Winter Break start (Mon)
+        { target: new Date(2025, 11, 22, 6, 0, 0, 0), countdownId: 'countdown2', realtimeId: 'realtime2' },
+        // Spring Break start (Mon)
+        { target: new Date(2026, 2, 23, 6, 0, 0, 0), countdownId: 'countdown3', realtimeId: 'realtime3' },
+        // Last day of school (Wed)
+        { target: new Date(2026, 5, 3, 6, 0, 0, 0), countdownId: 'countdown4', realtimeId: 'realtime4' }
     ];
 
-    targetDates.forEach(({ target, countdownId, realtimeId }, index) => {
+    targetDates.forEach(({ target, countdownId, realtimeId }) => {
         if (now >= target) {
             document.getElementById(countdownId).textContent = "0 school days";
         } else {
@@ -135,19 +153,18 @@ function updateCountdowns() {
     });
 }
 
-
 function scheduleNextUpdate() {
     const now = new Date();
     const nextUpdate = new Date(now);
-    
+
     // Set to 6 AM
     nextUpdate.setHours(6, 0, 0, 0);
-    
+
     // If it's already past 6 AM, schedule for 6 AM tomorrow
     if (now.getHours() >= 6) {
         nextUpdate.setDate(nextUpdate.getDate() + 1);
     }
-    
+
     const timeUntilUpdate = nextUpdate - now;
     console.log(`Next update scheduled for: ${nextUpdate.toLocaleString()} (in ${Math.round(timeUntilUpdate/1000/60)} minutes)`);
 }
@@ -156,7 +173,7 @@ function scheduleUpdates() {
     // Update school day counts at 6 AM
     scheduleNextUpdate();
     updateCountdowns(); // Initial update
-    
+
     // Schedule first 6 AM update
     const now = new Date();
     const nextUpdate = new Date(now);
@@ -165,13 +182,13 @@ function scheduleUpdates() {
         nextUpdate.setDate(nextUpdate.getDate() + 1);
     }
     const timeUntilUpdate = nextUpdate - now;
-    
+
     setTimeout(() => {
         updateCountdowns();
         // After first 6 AM update, schedule daily updates
         setInterval(updateCountdowns, 24 * 60 * 60 * 1000);
     }, timeUntilUpdate);
-    
+
     // Update real-time countdowns every second
     setInterval(updateCountdowns, 1000);
 }
