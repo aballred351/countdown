@@ -31,11 +31,9 @@ function isExcludedDate(date) {
 
         // FEBRUARY 2026
         '2026-02-13', // Staff Professional Learning
-        '2026-02-16', // Presidents’ Day (Holiday)
         '2026-02-23', // Teacher Directed
 
         // MARCH 2026
-        '2026-03-13', // Staff Professional Learning
         // Spring Break
         '2026-03-23', '2026-03-24', '2026-03-25', '2026-03-26', '2026-03-27',
         '2026-03-30', // Teacher Directed (after break)
