@@ -28,9 +28,8 @@ function toggleCard(index) {
     }
 }
 
-// ARROW NAVIGATION
 document.getElementById('prevBtn').onclick = (e) => {
-    e.stopPropagation(); // Prevents clicking the card background
+    e.stopPropagation();
     let newIdx = (activeIndex - 1 + cards.length) % cards.length;
     toggleCard(newIdx);
 };
@@ -40,15 +39,6 @@ document.getElementById('nextBtn').onclick = (e) => {
     let newIdx = (activeIndex + 1) % cards.length;
     toggleCard(newIdx);
 };
-
-// Keyboard Support
-window.addEventListener('keydown', (e) => {
-    if (activeIndex !== null) {
-        if (e.key === "ArrowLeft") document.getElementById('prevBtn').click();
-        if (e.key === "ArrowRight") document.getElementById('nextBtn').click();
-        if (e.key === "Escape") toggleCard(activeIndex);
-    }
-});
 
 function countSchoolDays(targetDate) {
     let today = new Date();
@@ -73,7 +63,8 @@ function update() {
 
         if (dist < 0) {
             ["days", "hours", "mins", "secs", "school-days"].forEach(id => {
-                document.getElementById(`${t.prefix}-${id}`).innerText = "0";
+                const el = document.getElementById(`${t.prefix}-${id}`);
+                if (el) el.innerText = "0";
             });
             return;
         }
