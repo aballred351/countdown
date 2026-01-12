@@ -1,52 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>School Days Countdown</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="countdown-row">
-            <div class="countdown-section">
-                <h2 class="subtitle">School Days until Thanksgiving Break(after today)</h2>
-                <div class="countdown" id="countdown1">Calculating...</div>
-            </div>
-            <div class="countdown-section">
-                <h2 class="subtitle">Time until Thanksgiving Break</h2>
-                <div class="realtime-countdown" id="realtime1">Calculating...</div>
-            </div>
-        </div>
+    <div class="main-wrapper">
+        <h1 class="main-title">School Year Dashboard</h1>
         
-        <div class="countdown-row">
-            <div class="countdown-section">
-                <h2 class="subtitle">School Days until Christmas Break(after today)</h2>
-                <div class="countdown" id="countdown2">Calculating...</div>
+        <div class="grid-container" id="cardGrid">
+            <button id="prevBtn" class="nav-btn left">❮</button>
+            <button id="nextBtn" class="nav-btn right">❯</button>
+
+            <div class="card" onclick="toggleCard(0)">
+                <h2>Thanksgiving Break</h2>
+                <div class="timer-row">
+                    <div class="box"><span id="tg-days">00</span><p>Days</p></div>
+                    <div class="box"><span id="tg-hours">00</span><p>Hrs</p></div>
+                    <div class="box"><span id="tg-mins">00</span><p>Min</p></div>
+                    <div class="box"><span id="tg-secs">00</span><p>Sec</p></div>
+                </div>
+                <p class="school-count">School Days: <span id="tg-school-days">0</span></p>
             </div>
-            <div class="countdown-section">
-                <h2 class="subtitle">Time until Christmas Break</h2>
-                <div class="realtime-countdown" id="realtime2">Calculating...</div>
+
+            <div class="card" onclick="toggleCard(1)">
+                <h2>Christmas Break</h2>
+                <div class="timer-row">
+                    <div class="box"><span id="xm-days">00</span><p>Days</p></div>
+                    <div class="box"><span id="xm-hours">00</span><p>Hrs</p></div>
+                    <div class="box"><span id="xm-mins">00</span><p>Min</p></div>
+                    <div class="box"><span id="xm-secs">00</span><p>Sec</p></div>
+                </div>
+                <p class="school-count">School Days: <span id="xm-school-days">0</span></p>
             </div>
-        </div>
-        
-        <div class="countdown-row">
-            <div class="countdown-section">
-                <h2 class="subtitle">School Days until Spring Break(after today)</h2>
-                <div class="countdown" id="countdown3">Calculating...</div>
+
+            <div class="card" onclick="toggleCard(2)">
+                <h2>Spring Break</h2>
+                <div class="timer-row">
+                    <div class="box"><span id="sb-days">00</span><p>Days</p></div>
+                    <div class="box"><span id="sb-hours">00</span><p>Hrs</p></div>
+                    <div class="box"><span id="sb-mins">00</span><p>Min</p></div>
+                    <div class="box"><span id="sb-secs">00</span><p>Sec</p></div>
+                </div>
+                <p class="school-count">School Days: <span id="sb-school-days">0</span></p>
             </div>
-            <div class="countdown-section">
-                <h2 class="subtitle">Time until Spring Break</h2>
-                <div class="realtime-countdown" id="realtime3">Calculating...</div>
-            </div>
-        </div>
-        
-        <div class="countdown-row">
-            <div class="countdown-section">
-                <h2 class="subtitle">School Days until Summer Break(after today)</h2>
-                <div class="countdown" id="countdown4">Calculating...</div>
-            </div>
-            <div class="countdown-section">
-                <h2 class="subtitle">Time until Summer Break</h2>
-                <div class="realtime-countdown" id="realtime4">Calculating...</div>
+
+            <div class="card" onclick="toggleCard(3)">
+                <h2>End of School</h2>
+                <div class="timer-row">
+                    <div class="box"><span id="ey-days">00</span><p>Days</p></div>
+                    <div class="box"><span id="ey-hours">00</span><p>Hrs</p></div>
+                    <div class="box"><span id="ey-mins">00</span><p>Min</p></div>
+                    <div class="box"><span id="ey-secs">00</span><p>Sec</p></div>
+                </div>
+                <p class="school-count">School Days: <span id="ey-school-days">0</span></p>
             </div>
         </div>
     </div>
