@@ -7,25 +7,26 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 .main-wrapper {
-    width: 90%;
+    width: 95%;
     max-width: 1000px;
     text-align: center;
+    padding: 20px 10px;
 }
 
 .main-title {
-    font-size: 2.5rem;
-    margin-bottom: 30px;
+    font-size: clamp(1.5rem, 5vw, 2.5rem); /* Scales title based on screen size */
+    margin-bottom: 20px;
     text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
 }
 
 .grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
+    gap: 20px;
     position: relative;
 }
 
@@ -34,7 +35,7 @@ body {
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 20px;
-    padding: 30px;
+    padding: 25px 15px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -46,46 +47,97 @@ body {
     flex-direction: column;
     justify-content: center;
     grid-column: span 2;
-    height: 400px;
+    min-height: 350px;
     cursor: default;
 }
 
-/* Navigation Arrows - Using Fixed to be on top of everything */
+/* Navigation Arrows */
 .nav-btn {
     display: none;
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.8);
     color: white;
     border: 2px solid #ffd700;
-    font-size: 3rem;
-    padding: 10px 25px;
+    font-size: 2rem;
+    padding: 10px 20px;
     cursor: pointer;
     border-radius: 50%;
     z-index: 9999;
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
 }
 
-.nav-btn:hover { background: #000; box-shadow: 0 0 20px #ffd700; }
-.left { left: 30px; }
-.right { right: 30px; }
+.left { left: 20px; }
+.right { right: 20px; }
 
-/* Show buttons when grid is in single-mode */
 .grid-container.single-mode .nav-btn {
     display: block !important;
 }
 
-.timer-row { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
-.box { background: white; color: #333; padding: 12px; border-radius: 12px; min-width: 75px; }
-.box span { display: block; font-size: 2rem; font-weight: bold; }
-.box p { margin: 0; font-size: 0.8rem; text-transform: uppercase; color: #888; }
+/* Timer Boxes */
+.timer-row { 
+    display: flex; 
+    justify-content: center; 
+    gap: 8px; 
+    margin: 15px 0; 
+}
+
+.box { 
+    background: white; 
+    color: #333; 
+    padding: 8px; 
+    border-radius: 10px; 
+    min-width: 60px; 
+    flex: 1; 
+    max-width: 80px;
+}
+
+.box span { display: block; font-size: 1.5rem; font-weight: bold; }
+.box p { margin: 0; font-size: 0.6rem; text-transform: uppercase; color: #888; }
 
 .school-count {
     background: rgba(0,0,0,0.4);
     display: inline-block;
-    padding: 8px 25px;
+    padding: 8px 20px;
     border-radius: 50px;
     color: #ffd700;
     font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* --- RESPONSIVE DESIGN RULES --- */
+
+/* TABLETS (Screens under 800px) */
+@media (max-width: 800px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* Stack cards in 1 column */
+        width: 100%;
+    }
+    
+    .grid-container.single-mode .card.active {
+        grid-column: span 1;
+    }
+
+    .left { left: 10px; }
+    .right { right: 10px; }
+}
+
+/* PHONES (Screens under 500px) */
+@media (max-width: 500px) {
+    .main-title { font-size: 1.8rem; }
+    
+    .box { min-width: 50px; padding: 5px; }
+    .box span { font-size: 1.2rem; }
+    
+    /* Move arrows to the bottom for easier thumb reach on mobile */
+    .nav-btn {
+        top: auto;
+        bottom: 30px;
+        transform: none;
+        padding: 15px 25px;
+    }
+    
+    .left { left: 20%; }
+    .right { right: 20%; }
 }
