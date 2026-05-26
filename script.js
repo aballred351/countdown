@@ -8,7 +8,7 @@ const targets = [
     { prefix: "tg", year: 2025, month: 10, day: 25, hr: 14, min: 50 },
     { prefix: "xm", year: 2025, month: 11, day: 25, hr: 14, min: 50 },
     { prefix: "sb", year: 2026, month: 2,  day: 13, hr: 14, min: 50 },
-    { prefix: "ey", year: 2026, month: 5,  day: 3,  hr: 12, min: 50 }
+    { prefix: "ey", year: 2026, month: 5,  day: 3,  hr: 13, min: 20 }
 ];
 
 let activeIndex = null;
