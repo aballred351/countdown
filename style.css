@@ -1,143 +1,655 @@
+/* =========================================================
+   GLOBAL PAGE STYLES
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-    font-family: 'Segoe UI', sans-serif;
-    color: white;
     margin: 0;
+    min-height: 100vh;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    color: #f8fafc;
+
+    background:
+        radial-gradient(circle at top left, rgba(34, 211, 238, 0.16), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.12), transparent 35%),
+        linear-gradient(145deg, #07111f, #0f172a 55%, #111827);
+
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+
+    overflow-x: hidden;
 }
+
+
+/* =========================================================
+   MAIN WRAPPER
+   ========================================================= */
 
 .main-wrapper {
-    width: 95%;
-    max-width: 1000px;
+    width: 94%;
+    max-width: 1200px;
+
+    padding: 35px 15px 45px;
+
     text-align: center;
-    padding: 20px 10px;
 }
+
+
+/* =========================================================
+   MAIN TITLE
+   ========================================================= */
 
 .main-title {
-    font-size: clamp(1.5rem, 5vw, 2.5rem); /* Scales title based on screen size */
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    margin: 0 0 30px;
+
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 3px 15px rgba(0, 0, 0, 0.45),
+        0 0 25px rgba(34, 211, 238, 0.18);
 }
+
+
+/* =========================================================
+   GRID
+   ========================================================= */
 
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
     position: relative;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 24px;
 }
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
 
 .card {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 20px;
-    padding: 25px 15px;
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15, 23, 42, 0.96),
+            rgba(30, 41, 59, 0.93)
+        );
+
+    border: 1px solid rgba(148, 163, 184, 0.22);
+
+    border-radius: 24px;
+
+    padding: 28px 20px 24px;
+
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.32),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
     cursor: pointer;
-    transition: all 0.3s ease;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
 }
 
-/* Single Mode Logic */
-.grid-container.single-mode .card { display: none; }
+
+/* Decorative top accent bar */
+
+.card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 6px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #22d3ee,
+            #38bdf8,
+            #facc15,
+            #fb7185
+        );
+}
+
+
+/* Card glow */
+
+.card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: -70px;
+    top: -70px;
+
+    border-radius: 50%;
+
+    background: rgba(34, 211, 238, 0.08);
+
+    pointer-events: none;
+}
+
+
+.card:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(34, 211, 238, 0.55);
+
+    box-shadow:
+        0 24px 55px rgba(0, 0, 0, 0.4),
+        0 0 25px rgba(34, 211, 238, 0.09);
+}
+
+
+/* =========================================================
+   CARD HEADINGS
+   If your HTML uses h2 or h3 inside cards, these will style them
+   ========================================================= */
+
+.card h2,
+.card h3 {
+    position: relative;
+    z-index: 2;
+
+    margin-top: 4px;
+    margin-bottom: 18px;
+
+    font-size: clamp(1.35rem, 3vw, 2rem);
+
+    color: #f8fafc;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   TIMER ROW
+   ========================================================= */
+
+.timer-row {
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 10px;
+
+    margin: 20px 0;
+}
+
+
+/* =========================================================
+   TIMER BOXES
+   ========================================================= */
+
+.box {
+    min-width: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f8fafc,
+            #e2e8f0
+        );
+
+    color: #0f172a;
+
+    border-radius: 16px;
+
+    padding: 14px 8px 11px;
+
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+    transition: transform 0.2s ease;
+}
+
+
+.card:hover .box {
+    transform: translateY(-2px);
+}
+
+
+.box span {
+    display: block;
+
+    font-size: clamp(1.7rem, 4vw, 2.5rem);
+
+    font-weight: 800;
+
+    line-height: 1;
+
+    letter-spacing: -1px;
+
+    color: #0f172a;
+}
+
+
+.box p {
+    margin: 8px 0 0;
+
+    font-size: 0.65rem;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   SCHOOL DAYS COUNT
+   ========================================================= */
+
+.school-count {
+    position: relative;
+    z-index: 2;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 6px;
+
+    padding: 10px 20px;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(250, 204, 21, 0.16),
+            rgba(251, 191, 36, 0.09)
+        );
+
+    border: 1px solid rgba(250, 204, 21, 0.38);
+
+    color: #fde047;
+
+    font-size: 0.95rem;
+    font-weight: 800;
+
+    letter-spacing: 0.4px;
+
+    box-shadow:
+        inset 0 0 18px rgba(250, 204, 21, 0.06);
+}
+
+
+/* =========================================================
+   SINGLE CARD MODE
+   ========================================================= */
+
+.grid-container.single-mode .card {
+    display: none;
+}
+
+
 .grid-container.single-mode .card.active {
     display: flex;
+
     flex-direction: column;
     justify-content: center;
-    grid-column: span 2;
-    min-height: 350px;
+
+    grid-column: 1 / -1;
+
+    min-height: 560px;
+
     cursor: default;
+
+    padding: 45px 40px;
+
+    border-color: rgba(34, 211, 238, 0.6);
+
+    box-shadow:
+        0 35px 80px rgba(0, 0, 0, 0.55),
+        0 0 40px rgba(34, 211, 238, 0.08);
 }
 
-/* Navigation Arrows */
+
+.grid-container.single-mode .card.active h2,
+.grid-container.single-mode .card.active h3 {
+    font-size: clamp(2rem, 5vw, 4rem);
+
+    margin-bottom: 35px;
+}
+
+
+.grid-container.single-mode .card.active .timer-row {
+    width: min(900px, 100%);
+
+    margin: 20px auto 30px;
+
+    gap: 18px;
+}
+
+
+.grid-container.single-mode .card.active .box {
+    padding: 24px 12px 20px;
+
+    border-radius: 20px;
+}
+
+
+.grid-container.single-mode .card.active .box span {
+    font-size: clamp(2.7rem, 7vw, 5rem);
+}
+
+
+.grid-container.single-mode .card.active .box p {
+    font-size: 0.8rem;
+
+    margin-top: 12px;
+}
+
+
+.grid-container.single-mode .card.active .school-count {
+    font-size: 1.25rem;
+
+    padding: 13px 28px;
+}
+
+
+/* =========================================================
+   NAVIGATION BUTTONS
+   ========================================================= */
+
 .nav-btn {
     display: none;
+
     position: fixed;
+
     top: 50%;
+
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    border: 2px solid #ffd700;
-    font-size: 2rem;
-    padding: 10px 20px;
-    cursor: pointer;
+
+    width: 62px;
+    height: 62px;
+
+    padding: 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
     border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15, 23, 42, 0.96),
+            rgba(30, 41, 59, 0.96)
+        );
+
+    color: #ffffff;
+
+    font-size: 2rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
     z-index: 9999;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.45),
+        0 0 20px rgba(34, 211, 238, 0.12);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
 }
 
-.left { left: 20px; }
-.right { right: 20px; }
+
+.nav-btn:hover {
+    transform: translateY(-50%) scale(1.08);
+
+    border-color: rgba(34, 211, 238, 0.7);
+
+    background:
+        linear-gradient(
+            145deg,
+            #164e63,
+            #0f172a
+        );
+}
+
+
+.left {
+    left: 28px;
+}
+
+
+.right {
+    right: 28px;
+}
+
 
 .grid-container.single-mode .nav-btn {
     display: block !important;
 }
 
-/* Timer Boxes */
-.timer-row { 
-    display: flex; 
-    justify-content: center; 
-    gap: 8px; 
-    margin: 15px 0; 
-}
 
-.box { 
-    background: white; 
-    color: #333; 
-    padding: 8px; 
-    border-radius: 10px; 
-    min-width: 60px; 
-    flex: 1; 
-    max-width: 80px;
-}
+/* =========================================================
+   TABLETS
+   ========================================================= */
 
-.box span { display: block; font-size: 1.5rem; font-weight: bold; }
-.box p { margin: 0; font-size: 0.6rem; text-transform: uppercase; color: #888; }
-
-.school-count {
-    background: rgba(0,0,0,0.4);
-    display: inline-block;
-    padding: 8px 20px;
-    border-radius: 50px;
-    color: #ffd700;
-    font-weight: bold;
-    font-size: 0.9rem;
-}
-
-/* --- RESPONSIVE DESIGN RULES --- */
-
-/* TABLETS (Screens under 800px) */
 @media (max-width: 800px) {
-    .grid-container {
-        grid-template-columns: 1fr; /* Stack cards in 1 column */
-        width: 100%;
-    }
-    
-    .grid-container.single-mode .card.active {
-        grid-column: span 1;
+
+    .main-wrapper {
+        width: 96%;
+
+        padding-top: 24px;
     }
 
-    .left { left: 10px; }
-    .right { right: 10px; }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+
+    .grid-container.single-mode .card.active {
+        grid-column: 1;
+
+        min-height: 500px;
+
+        padding: 35px 20px;
+    }
+
+
+    .left {
+        left: 10px;
+    }
+
+
+    .right {
+        right: 10px;
+    }
+
+
+    .nav-btn {
+        width: 52px;
+        height: 52px;
+
+        font-size: 1.6rem;
+    }
 }
 
-/* PHONES (Screens under 500px) */
+
+/* =========================================================
+   PHONES
+   ========================================================= */
+
 @media (max-width: 500px) {
-    .main-title { font-size: 1.8rem; }
-    
-    .box { min-width: 50px; padding: 5px; }
-    .box span { font-size: 1.2rem; }
-    
-    /* Move arrows to the bottom for easier thumb reach on mobile */
+
+    body {
+        align-items: flex-start;
+    }
+
+
+    .main-wrapper {
+        width: 100%;
+
+        padding: 20px 12px 100px;
+    }
+
+
+    .main-title {
+        font-size: 2rem;
+
+        margin-bottom: 20px;
+    }
+
+
+    .card {
+        padding: 24px 14px 20px;
+
+        border-radius: 20px;
+    }
+
+
+    .timer-row {
+        gap: 6px;
+    }
+
+
+    .box {
+        padding: 11px 4px 9px;
+
+        border-radius: 12px;
+    }
+
+
+    .box span {
+        font-size: 1.45rem;
+    }
+
+
+    .box p {
+        font-size: 0.52rem;
+
+        letter-spacing: 0.5px;
+    }
+
+
+    .school-count {
+        font-size: 0.82rem;
+
+        padding: 9px 15px;
+    }
+
+
+    /* Bigger single countdown on phone */
+
+    .grid-container.single-mode .card.active {
+        min-height: 430px;
+
+        padding: 25px 12px 90px;
+    }
+
+
+    .grid-container.single-mode .card.active .timer-row {
+        gap: 6px;
+    }
+
+
+    .grid-container.single-mode .card.active .box {
+        padding: 15px 4px;
+    }
+
+
+    .grid-container.single-mode .card.active .box span {
+        font-size: 2rem;
+    }
+
+
+    .grid-container.single-mode .card.active .box p {
+        font-size: 0.55rem;
+    }
+
+
+    /* Put navigation arrows near bottom */
+
     .nav-btn {
         top: auto;
-        bottom: 30px;
+
+        bottom: 24px;
+
         transform: none;
-        padding: 15px 25px;
+
+        width: 62px;
+        height: 54px;
+
+        border-radius: 16px;
     }
-    
-    .left { left: 20%; }
-    .right { right: 20%; }
+
+
+    .nav-btn:hover {
+        transform: scale(1.05);
+    }
+
+
+    .left {
+        left: calc(50% - 78px);
+    }
+
+
+    .right {
+        right: calc(50% - 78px);
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .timer-row {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 8px;
+    }
+
+
+    .box span {
+        font-size: 1.7rem;
+    }
+
+
+    .grid-container.single-mode .card.active .timer-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
